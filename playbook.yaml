@@ -9,6 +9,7 @@
   roles:
     - setting_up_consul_server
 
+
 - hosts: client
   remote_user: root
   roles:
