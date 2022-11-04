@@ -1,0 +1,19 @@
+---
+# tasks file for setting_up_consul_client
+- name: Copy consul config
+  template:
+    src: config.json.j2
+    dest: /etc/consul.d/config.json
+    mode: 0644
+
+- name: reload daemon
+  command: systemctl daemon-reload
+
+- name: enable consul service
+  command: systemctl enable consul
+
+- name: start consul service
+  command: systemctl start consul
+
+- name: consul join
+  command: consul join 192.168.0.11

@@ -1,0 +1,15 @@
+---
+- hosts: all
+  remote_user: root
+  roles:
+    - install_consul
+
+- hosts: server
+  remote_user: root
+  roles:
+    - setting_up_consul_server
+
+- hosts: client
+  remote_user: root
+  roles:
+    - setting_up_consul_client

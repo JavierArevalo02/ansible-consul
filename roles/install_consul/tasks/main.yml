@@ -1,0 +1,12 @@
+---
+- name: update
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: install consul
+  command: sudo apt-get -y install consul
+
+- name: Copy config service
+  template:
+    src: consul.service.j2
+    dest: /lib/systemd/system/consul.service
+    mode: 0644

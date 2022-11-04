@@ -1,0 +1,25 @@
+[Unit]
+Description=Consul agent
+Documentation=https://www.consul.io/docs/
+After=network-online.target
+Wants=network-online.target
+ConditionFileNotEmpty=/etc/consul.d/config.json
+
+[Service]
+Environment=-/etc/consul.d/consul.env
+EnvironmentFile=-/etc/default/%p
+ExecStart=/usr/bin/consul agent -config-dir=/etc/consul.d/
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+User=consul
+KillSignal=SIGINT
+
+#AmbientCapabilities=CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectKernelTunables=true
+
+[Install]
+WantedBy=multi-user.target
